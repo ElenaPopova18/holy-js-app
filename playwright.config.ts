@@ -1,0 +1,35 @@
+import type { PlaywrightTestConfig } from '@playwright/test';
+import { devices } from '@playwright/test';
+
+Error.stackTraceLimit = Infinity;
+
+const PORT = Number(process.env.PORT) || 3000;
+const BASE_URL = `http://localhost:${PORT}`;
+
+const projects: PlaywrightTestConfig['projects'] = [
+  {
+    name: 'chromium',
+    use: { ...devices['Desktop Chrome'] },
+  },
+];
+
+const config: PlaywrightTestConfig = {
+  testMatch: '__integration__/**/*.test.ts',
+  reporter: [['list'], ['html', { open: 'never' }]],
+  use: {
+    testIdAttribute: 'data-qa-type',
+    headless: true,
+    video: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+    baseURL: BASE_URL,
+    trace: 'retain-on-failure',
+  },
+  webServer: {
+    command: 'npm run start',
+    url: BASE_URL,
+    reuseExistingServer: !process.env.CI,
+  },
+  projects,
+};
+
+export default config;

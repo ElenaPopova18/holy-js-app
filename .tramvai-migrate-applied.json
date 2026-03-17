@@ -1,0 +1,1 @@
+{"package":{"module-common":{"migrations":["1-als-rename-module.js"]},"module-router":{"migrations":["1-link-from-module.js","d2025-05-29b-view-transitions-hook-expansion.js","d2025-05-30b-view-transitions-provider-expansion.js"]},"cli":{"migrations":["d2023-02-01b-tramvai-config-refactoring.js","d2025-04-11b-tramvai-config-remove-modern.js"]}}}

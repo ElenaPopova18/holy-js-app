@@ -1,0 +1,31 @@
+{
+  "$schema": "./node_modules/@tramvai/cli/schema.json",
+  "projects": {
+    "holy-js-app" : {
+      "name": "holy-js-app",
+      "root": "src",
+      "type": "application",
+      "sourceMap": {
+        "development": false,
+        "production": true
+      },
+      "postcss": {
+        "config": "src/postcss"
+      },
+      "fileSystemPages": {
+        "enabled": true,
+        "pagesDir": false
+      },
+      "experiments": {
+        "transpilation": {
+          "loader": "swc",
+          "include": {
+            "development": "none",
+            "production": "only-modern"
+          }
+        },
+        "runtimeChunk": "single"
+      }
+    }
+  }
+}
