@@ -1,10 +1,14 @@
 import { createApp } from '@tramvai/core';
-import { CommonModule } from '@tramvai/module-common';
+import { CommonModule, ENV_MANAGER_TOKEN } from '@tramvai/module-common';
 import { SpaRouterModule } from '@tramvai/module-router';
 import { RenderModule } from '@tramvai/module-render';
 import { ServerModule } from '@tramvai/module-server';
 import { ErrorInterceptorModule } from '@tramvai/module-error-interceptor';
 import { SeoModule } from '@tramvai/module-seo';
+import {
+  ChildAppModule,
+  CHILD_APP_RESOLUTION_CONFIGS_TOKEN,
+} from '@tramvai/module-child-app';
 import {
   RENDER_SLOTS,
   ResourceType,
@@ -22,6 +26,7 @@ createApp({
     ServerModule,
     ErrorInterceptorModule,
     HeaderModule,
+    ChildAppModule,
   ],
   providers: [
     {
@@ -32,6 +37,26 @@ createApp({
         slot: ResourceSlot.HEAD_META,
         payload:
           '<meta name="viewport" content="width=device-width, initial-scale=1">',
+      },
+    },
+    {
+      provide: CHILD_APP_RESOLUTION_CONFIGS_TOKEN,
+      useFactory: ({ environmentManager }) => {
+        return [
+          {
+            name: 'holy-js-childs',
+            toggle: 'childApp/holyJsChilds',
+            // Путь к child app - для локальной разработки используем относительный путь
+            // В продакшене можно заменить на S3 bucket или CDN
+            baseUrl:
+              environmentManager.get('CHILD_APPS_BASE_URL') ||
+              'http://localhost:4040/',
+            byTag: { latest: { version: '0.0.0-stub' } },
+          },
+        ];
+      },
+      deps: {
+        environmentManager: ENV_MANAGER_TOKEN,
       },
     },
   ],

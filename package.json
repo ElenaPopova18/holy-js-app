@@ -24,6 +24,7 @@
     "packageManager": "yarn@4.13.0",
     "dependencies": {
         "@tramvai/core": "^6.79.33",
+        "@tramvai/module-child-app": "^6.79.33",
         "@tramvai/module-common": "^6.79.33",
         "@tramvai/module-error-interceptor": "^6.79.33",
         "@tramvai/module-render": "^6.79.33",
