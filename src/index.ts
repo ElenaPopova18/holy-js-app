@@ -47,7 +47,6 @@ createApp({
             name: 'holy-js-childs',
             toggle: 'childApp/holyJsChilds',
             // Путь к child app - для локальной разработки используем относительный путь
-            // В продакшене можно заменить на S3 bucket или CDN
             baseUrl:
               environmentManager.get('CHILD_APPS_BASE_URL') ||
               'http://localhost:4040/',
