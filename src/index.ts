@@ -21,7 +21,10 @@ createApp({
   modules: [
     CommonModule,
     SpaRouterModule,
-    RenderModule.forRoot({ useStrictMode: true }),
+    RenderModule.forRoot({ 
+      useStrictMode: true,
+      renderMode: 'ssr',
+    }),
     SeoModule,
     ServerModule,
     ErrorInterceptorModule,
@@ -49,7 +52,15 @@ createApp({
             // Путь к child app - для локальной разработки используем относительный путь
             baseUrl:
               environmentManager.get('CHILD_APPS_BASE_URL') ||
-              'http://localhost:4040/',
+              'http://localhost:4041/',
+            byTag: { latest: { version: '0.0.0-stub' } },
+          },
+          {
+            name: 'big-conf-mf',
+            toggle: 'childApp/bigConfMf',
+            baseUrl:
+              environmentManager.get('BIG_CONF_MF_BASE_URL') ||
+              'http://localhost:4043/',
             byTag: { latest: { version: '0.0.0-stub' } },
           },
         ];

@@ -14,6 +14,7 @@
       },
       "fileSystemPages": {
         "enabled": true,
+        "routesDir": "routes",
         "pagesDir": false
       },
       "experiments": {
